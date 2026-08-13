@@ -22,7 +22,7 @@ Then add the desired library product as a target dependency:
 ## Requirements
 
 - iOS 14.0+
-- Xcode 15+
+- Xcode 16+
 - Swift 6.0+
 
 ## License
