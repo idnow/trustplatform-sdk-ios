@@ -54,30 +54,45 @@ IDnowTrustPlatform.configure(environment: .production)
 ```swift
 let session = TPSession(token: token)
 do {
-    try await session.run(from: viewController)
-    // Flow completed successfully.
-} catch TrustPlatformError.cancelled {
-    // The user cancelled the flow.
+    switch try await session.run(from: viewController) {
+    case .completed:
+        // The flow completed. Query your backend for the outcome.
+        // See https://docs.eu.platform.idnow.io/docs/integration/get-session-results
+    case .aborted:
+        // The user aborted the flow.
+    @unknown default:
+        break
+    }
 } catch {
     // See Handle Errors below.
 }
 ```
 
-To cancel a running session programmatically, call `session.stop()`.
+To abort a running session programmatically, call `session.stop()`.
+
+## Handle Outcomes
+
+`run(from:)` returns a `FlowOutcome` value when the flow reaches a terminal state.
+
+| Case         | When it occurs                  |
+| ------------ | ------------------------------- |
+| `.completed` | The flow completed successfully |
+| `.aborted`   | The user aborted the flow       |
+
+`.completed` only signals that the flow finished. To retrieve the actual outcome, query the [Get session results](https://docs.eu.platform.idnow.io/docs/integration/get-session-results) API endpoint using the `sessionId` you received when creating the session.
 
 ## Handle Errors
 
-`run(from:)` throws a `TrustPlatformError` on failure.
+`run(from:)` throws a `TrustPlatformError` when a technical failure prevents the flow from running or completing.
 
-| Case                                  | When it occurs                                       |
-| ------------------------------------- | ---------------------------------------------------- |
-| `cancelled`                           | The user cancelled the flow                          |
-| `invalidToken`                        | The session token is malformed or rejected           |
-| `sessionExpired`                      | The session timed out on the server                  |
-| `networkFailure(underlying:)`         | No connection or a request failed                    |
-| `flowError(status:)`                  | The flow ended with a terminal error or abort status |
-| `nativeHandlerFailure(code:message:)` | A native handler reported a non-recoverable failure  |
-| `internalError`                       | An unexpected SDK-internal failure                   |
+| Case                                  | When it occurs                                      |
+| ------------------------------------- | --------------------------------------------------- |
+| `flowFailure`                         | A technical failure occurred within the flow        |
+| `invalidToken`                        | The session token is not valid for an SDK session   |
+| `sessionExpired`                      | The session timed out on the server                 |
+| `networkFailure(underlying:)`         | No connection or a request failed                   |
+| `nativeHandlerFailure(code:message:)` | A native handler reported a non-recoverable failure |
+| `internalError`                       | An unexpected SDK-internal failure                  |
 
 `errorDescription` on each case is localized and safe to display to end users.
 

@@ -17,19 +17,19 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/idnow/sunflower-sdk-ios.git", exact: "2.1.8"),
-        .package(url: "https://github.com/idnow/docidv-sdk-ios", exact: "1.8.0")
+        .package(url: "https://github.com/idnow/sunflower-sdk-ios.git", exact: "2.1.11"),
+        .package(url: "https://github.com/idnow/docidv-sdk-ios", exact: "1.12.0")
     ],
     targets: [
         .binaryTarget(
             name: "TrustPlatform",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.4.1-beta/TrustPlatform.xcframework.zip",
-            checksum: "20627a57973ff161326bc5263def4cff7995c35c9971bbb4d7ac56fdd68861de"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.5.0-beta/TrustPlatform.xcframework.zip",
+            checksum: "f203d1bbb89683b6d849aa677d6afebb32689b5b613daaa0a71381b14a75e56f"
         ),
         .binaryTarget(
             name: "TrustPlatformDocIDV",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.4.1-beta/TrustPlatformDocIDV.xcframework.zip",
-            checksum: "7b1f93bc040f5816305a6512bf7ccf4d74932e9787224bec2fba329b36dba652"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.5.0-beta/TrustPlatformDocIDV.xcframework.zip",
+            checksum: "b89f9a2d6c7b0e4fcfc43621e4f8779ba667a6650a5a508918fb6d284ee55bd2"
         ),
         .target(
             name: "TrustPlatform-Target-Wrapper",
