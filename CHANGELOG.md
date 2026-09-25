@@ -5,6 +5,35 @@ All notable changes to the TrustPlatform iOS SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0]
+
+### Added
+
+- The SDK now sends device context (OS, device model, manufacturer, timezone, language, VPN status) when acquiring a session.
+
+### Changed
+
+- Added dark mode support for the WebView.
+- The flow WebView now uses a non-persistent `WKWebsiteDataStore`, so session data is no longer written to disk.
+
+### Fixed
+
+- Fixed a styling issue that caused the WebView not to take up the full screen.
+
+## [0.5.4] - 2026-09-07
+
+- Release pipeline improvements. No SDK changes.
+
+## [0.5.4-beta] - 2026-09-03
+
+- Release pipeline improvements. No SDK changes.
+
+## [0.5.3-beta] - 2026-09-03
+
+### Changed
+
+- Added `-Wl,-dead_strip_dylibs` linker flag to reduce binary size.
+
 ## [0.5.2-beta]
 
 ### Fixed
