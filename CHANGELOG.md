@@ -5,6 +5,16 @@ All notable changes to the TrustPlatform iOS SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1]
+
+### Changed
+
+- The styling context injected into the WebView is now scheme-scoped: `backgroundColour` is a per-scheme map (`{ dark }`) instead of a flat hex. Requires a Player version that reads the new shape.
+
+### Fixed
+
+- Fixed the WebView background rendering white in dark mode on some OS versions (<=iOS 18), where the injected styling colour was flattened to its light variant at WebView creation.
+
 ## [0.6.0]
 
 ### Added

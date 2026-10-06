@@ -23,13 +23,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "TrustPlatform",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.0/TrustPlatform.xcframework.zip",
-            checksum: "71e531332f09f2892055612cfbf27e1b0597e9fd6bdce35f471f270c0ba45e90"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.1/TrustPlatform.xcframework.zip",
+            checksum: "1731fa52721279dc0dc403a3c4abebead59b63e4dd35a8325b109e907517f808"
         ),
         .binaryTarget(
             name: "TrustPlatformDocIDV",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.0/TrustPlatformDocIDV.xcframework.zip",
-            checksum: "24e5e78ed0af0150948ae7c1ab058c03da5f4507a32a84078ae14d1ade99c983"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.1/TrustPlatformDocIDV.xcframework.zip",
+            checksum: "cecfcb8419411b31ed260b71e6378865ab78d4b27f11c6208df23308d56beb9a"
         ),
         .target(
             name: "TrustPlatform-Target-Wrapper",
