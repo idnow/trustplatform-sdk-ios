@@ -5,6 +5,30 @@ All notable changes to the TrustPlatform iOS SDK will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0]
+
+### Added
+
+- `TrustPlatformEvent` and `StepProgress`: the SDK now reports the progress of the current step (`.progress(.inManualReview)` and so on) while the flow runs. Progress is reported only when the value changes, and a run reports a waiting value at once if it starts while a step is already waiting. Requires a Player version that sends `stepProgress` on `session-state`; with an older Player no progress events are delivered.
+
+### Changed
+
+- **Breaking:** the minimum supported iOS version is now 15.0 (was 14.0).
+- **Breaking:** `TPSession.run(from:)` is replaced by `run(from:onEvent:) async`. It no longer returns a value or throws: progress and how the flow ended (`.completed`, `.aborted`, `.failed(TrustPlatformError)`) arrive through the event handler, which runs on the main actor. Setup failures arrive as `.failed`.
+- **Breaking:** `run(from:onEvent:)` returns once the SDK is off screen. With `dismissOnFinish: false`, the terminal event is delivered when the flow ends and `run` returns when the user closes the SDK.
+- **Breaking:** `TPSession.stop()`, and cancelling the task awaiting `run`, now close the SDK without delivering any event (previously `run` returned `.aborted`). `.aborted` now only means the session was aborted on the server.
+- **Breaking:** calling `run` while a run of the same session is active now returns immediately without an event (previously it returned `.aborted`).
+
+### Removed
+
+- **Breaking:** `FlowOutcome`. Use `TrustPlatformEvent`.
+
+### Fixed
+
+- Pop-ups opened by the Player with `window.open`, such as an OIDC login, were silently dropped. A pop-up to a host the Player announces for the current step now opens in the external browser (`SFSafariViewController`); any other pop-up stays blocked. Requires a Player version that sends `popupHosts` on `session-state`.
+- Camera and microphone access inside the Player could fail silently, because the permission handler was never called. It now runs: the Player's own origin is granted without a prompt and any other origin gets the system prompt.
+- The WebView was reloaded only when the session URL changed, so a step that wrote no session state left the screen frozen. The SDK now sends a `session-refresh` message to the Player on every poll and the Player re-renders in place instead of reloading, which also removes the white flash between steps. Requires a Player version that handles `session-refresh`; with an older Player the URL-change reload remains the fallback.
+
 ## [0.6.1]
 
 ### Changed

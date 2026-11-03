@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "TrustPlatform",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -23,13 +23,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "TrustPlatform",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.1/TrustPlatform.xcframework.zip",
-            checksum: "1731fa52721279dc0dc403a3c4abebead59b63e4dd35a8325b109e907517f808"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.7.0/TrustPlatform.xcframework.zip",
+            checksum: "4a56964b7d9f7170069a0e921685478b6507483604a76dbaa9159282610c45df"
         ),
         .binaryTarget(
             name: "TrustPlatformDocIDV",
-            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.6.1/TrustPlatformDocIDV.xcframework.zip",
-            checksum: "cecfcb8419411b31ed260b71e6378865ab78d4b27f11c6208df23308d56beb9a"
+            url: "https://github.com/idnow/trustplatform-sdk-ios/releases/download/0.7.0/TrustPlatformDocIDV.xcframework.zip",
+            checksum: "9722ca7ef9c9a56526db770fcb7ce8ff8eb838eb0c406fc6dc2828320df8d455"
         ),
         .target(
             name: "TrustPlatform-Target-Wrapper",
